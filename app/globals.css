@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0b;        /* Duboka, bogata crno-siva */
+  --surface: #121214;           /* Kartice, sekcije menija, modalni prozori */
+  --surface-hover: #1a1a1e;     /* Hover efekat na stavke menija */
+  
+  --text-primary: #fafafa;      /* Glavni tekst (skoro čista bela) */
+  --text-secondary: #a1a1aa;    /* Sporedni tekst, opisi jela (siva) */
+  --text-muted: #71717a;        /* Manje bitne informacije, npr. fusnote */
+
+  /* Luksuzno zlato / šampanjac akcenti */
+  --accent: #d4af37;            /* Elegantna zlatna */
+  --accent-hover: #b8932d;      /* Tamnija zlatna za dugmad u hover stanju */
+  --accent-light: #1f1b10;      /* Veoma tamna zlatna nijansa za suptilne pozadine bedževa */
+  
+  --border: #1f1f23;            /* Tanka, otmena linija između sekcija */
+  --success: #10b981;           /* Status "Otvoreno" ili uspešna narudžbina */
 }
 
-@theme inline {
+/* Tailwind v4 konfiguracija tema direktno u CSS-u */
+@theme {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-light: var(--accent-light);
+  
+  --color-border: var(--border);
+  --color-success: var(--success);
+
+  /* Mapiranje novih premium fontova */
+  --font-serif: var(--font-serif, serif);
+  --font-sans: var(--font-sans, sans-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Globalni stilovi */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Pomoćna klasa za prelepe serifne naslove */
+h1, h2, h3, .font-display {
+  font-family: var(--font-serif);
 }
