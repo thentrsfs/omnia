@@ -1,21 +1,21 @@
 import type { Metadata } from 'next';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Syne, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 
 import Navbar from '@/components/Navbar';
 
 // Glavni font za tekst i meni
-const inter = Inter({
+const jakarta = Plus_Jakarta_Sans({
 	variable: '--font-sans',
 	subsets: ['latin'],
 	weight: ['300', '400', '500', '600'],
 });
 
 // Luksuzni font za naslove
-const playfair = Playfair_Display({
+const syne = Syne({
 	variable: '--font-serif',
 	subsets: ['latin'],
-	weight: ['400', '600', '700'],
+	weight: ['400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang='en'
-			className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
+			className={`${jakarta.variable} ${syne.variable} h-full antialiased`}>
 			<body className='min-h-full flex flex-col bg-background text-text-primary'>
 				<Navbar />
 				{children}

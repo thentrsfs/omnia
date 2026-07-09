@@ -1,48 +1,85 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { X } from 'lucide-react';
 
+import gsap from 'gsap';
+
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
+	const [isScrolled, setIsScrolled] = useState(false);
 	const cartCount = 1;
+
+	// Prati skrol stranice da bi dinamički promenio stil Navbara
+	useEffect(() => {
+		const handleScroll = () => {
+			if (window.scrollY > 50) {
+				setIsScrolled(true);
+			} else {
+				setIsScrolled(false);
+			}
+		};
+
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
 
 	// Funkcija za glatko skrolovanje sa zadrškom zbog animacije zatvaranja
 	const scrollToSection = (id: string) => {
 		if (isOpen) setIsOpen(false);
 
 		setTimeout(() => {
-			const element = document.getElementById(id);
-			if (element) {
-				element.scrollIntoView({ behavior: 'smooth' });
-			}
-		}, 300);
+			gsap.to(window, {
+				duration: 1.2,
+				scrollTo: { y: `#${id}` },
+				ease: 'power4.inOut',
+			});
+		}, 300); // Čeka da se zatvori mobilni meni, pa onda glatko skroluje
 	};
+
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'auto';
+		}
+	}, [isOpen]);
 
 	return (
 		<>
 			{/* GLAVNI NAVBAR (Fiksiran na vrhu) */}
-			<nav className='fixed top-0 left-0 right-0 z-40 bg-background/60 backdrop-blur-xl'>
-				{/* Top Bar */}
-				<div className='border-b border-border/40 bg-surface/30 px-4 py-1.5 text-center text-[9px] lg:text-[10px] lg:font-medium tracking-[0.2em] uppercase text-text-secondary flex items-center justify-center gap-2'>
+			<nav
+				className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-300 ${
+					isScrolled
+						? 'bg-background/50 backdrop-blur-md border-b border-border/40'
+						: 'bg-transparent border-b border-transparent'
+				}`}>
+				{/* Top Bar - Smanjujemo mu vidljivost ili ga činimo providnijim na vrhu */}
+				<div
+					className={`text-center text-[8px] lg:text-[10px] tracking-[0.2em] uppercase text-text-secondary flex items-center justify-center gap-2 px-4 py-1.5 ${
+						isScrolled
+							? 'border-b border-border/40 bg-surface/30'
+							: 'bg-transparent'
+					}`}>
 					<span className='h-1.5 w-1.5 rounded-full bg-success animate-pulse' />
 					Accepting Online Orders & Reservations Today
 				</div>
 
 				<div className='mx-auto max-w-7xl px-6 lg:px-12'>
-					<div className='flex h-24 items-center justify-between md:grid md:grid-cols-3'>
+					{/* Smanjili smo h-24 na h-20 da bude elegantniji i manje glomazan */}
+					<div className='flex lg:h-20 h-16 items-center justify-between md:grid md:grid-cols-3'>
 						{/* DESKTOP LINKS */}
-						<div className='hidden md:flex items-center space-x-10 text-[11px] font-medium tracking-[0.2em] uppercase text-text-secondary'>
+						<div className='hidden md:flex items-center space-x-10 text-[11px] tracking-[0.2em] uppercase text-text-secondary'>
 							<button
 								onClick={() => scrollToSection('menu')}
 								className='hover:text-accent transition-colors duration-300 relative py-1 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-accent hover:after:w-full after:transition-all after:duration-300 cursor-pointer'>
-								The Menu
+								MENU
 							</button>
 							<button
 								onClick={() => scrollToSection('experience')}
 								className='hover:text-accent transition-colors duration-300 relative py-1 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-accent hover:after:w-full after:transition-all after:duration-300 cursor-pointer'>
-								The Experience
+								ABOUT
 							</button>
 						</div>
 
@@ -66,9 +103,14 @@ export default function Navbar() {
 								</span>
 							</button>
 
+							{/* Ako je na vrhu, dugme ima transparentniju ivicu da ne vrišti */}
 							<button
 								onClick={() => scrollToSection('reservations')}
-								className='relative inline-flex items-center justify-center px-6 py-3 text-[11px] font-medium tracking-[0.2em] uppercase text-text-primary border border-border hover:border-accent group overflow-hidden transition-colors duration-500 cursor-pointer'>
+								className={`relative inline-flex items-center justify-center px-6 py-2.5 text-[11px] tracking-[0.2em] uppercase text-text-primary border transition-all duration-500 group overflow-hidden cursor-pointer ${
+									isScrolled
+										? 'border-border hover:border-accent'
+										: 'border-text-primary/30 hover:border-accent'
+								}`}>
 								<span className='absolute inset-0 bg-accent scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out' />
 								<span className='relative z-10 group-hover:text-background transition-colors duration-500'>
 									Book A Table
@@ -99,7 +141,6 @@ export default function Navbar() {
 								)}
 							</button>
 
-							{/* Hamburger Toggle */}
 							<button
 								onClick={() => setIsOpen(!isOpen)}
 								className='group p-2 text-text-secondary focus:outline-none relative'
@@ -127,12 +168,12 @@ export default function Navbar() {
 
 			{/* SIDE DRAWER (Zauzima otprilike pola ekrana/70% na jako malim uređajima i klizi s desne strane) */}
 			<div
-				className={`fixed top-0 right-0 bottom-0 z-40 w-[70%] sm:w-[50%] bg-surface border-l border-border/40 pt-36 px-8 transition-transform duration-300 ease-in-out md:hidden ${
+				className={`fixed top-0 right-0 bottom-0 z-40 w-[70%] sm:w-[50%] bg-surface/50 backdrop-blur-2xl border-l border-border/40 pt-36 px-8 transition-transform duration-300 ease-in-out md:hidden ${
 					isOpen ? 'translate-x-0' : 'translate-x-full'
 				}`}>
 				<X
 					onClick={() => setIsOpen(false)}
-					className='absolute top-16 right-8 w-6 h-6 cursor-pointer'
+					className='absolute top-11 right-8 w-6 h-6 cursor-pointer'
 				/>
 				{/* Linkovi unutar fioke sa tvojom scrollToSection funkcijom */}
 				<div className='flex flex-col items-start space-y-8 text-center'>
