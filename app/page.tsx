@@ -2,7 +2,9 @@
 
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+
 import Hero from '@/components/sections/Hero';
+import Menu from '@/components/sections/Menu';
 
 // Registrujemo ScrollToPlugin
 gsap.registerPlugin(ScrollToPlugin);
@@ -30,13 +32,7 @@ export default function Home() {
 				/>
 
 				{/* PRIVREMENI PLACEHOLDERI SEKCIJA (Zamenićemo ih pravim komponentama) */}
-				<section
-					id='menu'
-					className='h-screen bg-surface border-t border-border flex items-center justify-center'>
-					<h2 className='text-3xl font-serif text-text-secondary'>
-						Smart Menu Section
-					</h2>
-				</section>
+				<Menu />
 
 				<section
 					id='experience'

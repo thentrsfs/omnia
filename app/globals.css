@@ -37,7 +37,7 @@
 
   /* Mapiranje novih premium fontova */
   --font-serif: var(--font-serif, serif);
-  --font-sans: var(--font-sans, sans-serif);
+  --font-sans: 'Inter', sans-serif;
 }
 
 /* Globalni stilovi */
