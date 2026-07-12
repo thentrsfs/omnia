@@ -106,7 +106,7 @@ export default function ChefGallery() {
 				{SIGNATURE_DISHES.map((dish) => (
 					<div
 						key={dish.id}
-						className='w-full sm:w-md lg:w-120 h-88 lg:h-125 shrink-0 overflow-hidden relative group'>
+						className='w-full lg:w-120 h-88 lg:h-125 shrink-0 overflow-hidden relative group'>
 						{/* SVIJETLEĆI KRUŽIĆ (SPINNER) - Vidi se samo dok je !loadedImages[dish.id] */}
 						{!loadedImages[dish.id] && (
 							<div className='absolute z-20 flex flex-col items-center gap-3 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
