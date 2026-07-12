@@ -117,7 +117,7 @@ export default function Menu() {
 	useGSAP(
 		() => {
 			gsap.fromTo(
-				'.menu-title-anim',
+				['.menu-title-anim', '.menu-filters'],
 				{ opacity: 0, y: 40 },
 				{
 					scrollTrigger: {
@@ -128,6 +128,7 @@ export default function Menu() {
 					y: 0,
 					duration: 1,
 					ease: 'power3.out',
+					delay: 0.15,
 				},
 			);
 		},
@@ -153,7 +154,7 @@ export default function Menu() {
 		<section
 			id='menu'
 			ref={containerRef}
-			className='py-32 w-full bg-background border-t border-border/20 relative z-30'>
+			className='py-32 lg:min-h-dvh w-full bg-background border-t border-border/50 relative z-30'>
 			<div className='mx-auto max-w-6xl px-6 lg:px-12'>
 				{/* ZAGLAVLJE MENIJA */}
 				<div className='menu-title-anim text-center mb-20 opacity-0'>
@@ -167,7 +168,7 @@ export default function Menu() {
 				</div>
 
 				{/* LUKSUZNI FILTERI (KATEGORIJE) */}
-				<div className='flex justify-center space-x-10 md:space-x-16 mb-20 text-[11px] font-bold tracking-[0.25em] border-b border-border/10 pb-4'>
+				<div className='menu-filters flex justify-center space-x-10 md:space-x-16 mb-20 text-[11px] font-bold tracking-[0.25em] border-b border-border/10 pb-4'>
 					{(['starters', 'mains', 'drinks'] as Category[]).map((cat) => (
 						<button
 							key={cat}
