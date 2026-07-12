@@ -25,7 +25,7 @@ export default function Home() {
 
 	return (
 		<>
-			<main className='grow bg-background'>
+			<main className='grow bg-background bg-[url("/images/noise.jpg")] bg-repeat bg-fixed bg-center bg-blend-color-dodge bg-size-[400px,400px]'>
 				{/* Povezujemo Hero dugmad sa našom novom GSAP skrol funkcijom */}
 				<Hero
 					onMenuClick={() => scrollToSection('menu')}

@@ -83,7 +83,7 @@ export default function ChefGallery() {
 	return (
 		<section
 			ref={targetRef}
-			className='relative lg:h-dvh bg-background w-full lg:overflow-hidden flex flex-col'>
+			className='relative lg:h-dvh w-full lg:overflow-hidden flex flex-col '>
 			{/* VRAĆENI STICKY NASLOV - Spušten na bezbednih top-28 i ima automatsko fejdovanje na skrol */}
 			<div
 				ref={titleRef}

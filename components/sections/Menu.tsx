@@ -154,7 +154,7 @@ export default function Menu() {
 		<section
 			id='menu'
 			ref={containerRef}
-			className='py-32 lg:min-h-dvh w-full bg-background border-t border-border/50 relative z-30'>
+			className='py-32 lg:min-h-dvh w-full relative z-30'>
 			<div className='mx-auto max-w-6xl px-6 lg:px-12'>
 				{/* ZAGLAVLJE MENIJA */}
 				<div className='menu-title-anim text-center mb-20 opacity-0'>
