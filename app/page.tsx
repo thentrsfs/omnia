@@ -25,24 +25,14 @@ export default function Home() {
 
 	return (
 		<>
-			<main className='grow'>
+			<main className='grow bg-background'>
 				{/* Povezujemo Hero dugmad sa našom novom GSAP skrol funkcijom */}
 				<Hero
 					onMenuClick={() => scrollToSection('menu')}
 					onBookClick={() => scrollToSection('reservations')}
 				/>
-
-				{/* PRIVREMENI PLACEHOLDERI SEKCIJA (Zamenićemo ih pravim komponentama) */}
 				<ChefGallery />
 				<Menu />
-
-				<section
-					id='reservations'
-					className='h-screen bg-surface border-t border-border flex items-center justify-center'>
-					<h2 className='text-3xl font-serif text-text-secondary'>
-						Reservation System Section
-					</h2>
-				</section>
 			</main>
 		</>
 	);

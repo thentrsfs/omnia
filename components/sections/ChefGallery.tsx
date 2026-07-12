@@ -26,19 +26,20 @@ export default function ChefGallery() {
 				[titleRef.current, scrollContainerRef.current],
 				{
 					opacity: 0,
-					y: 50, // Kreću malo niže
+					y: 40, // Kreću malo niže
 				},
 				{
 					opacity: 1,
 					y: 0, // Dolaze na svoje prirodno mesto
 					duration: 1,
-					stagger: 0.2, // Prvo se pojavi naslov, pa delić sekunde kasnije i slike
+					stagger: 0.15, // Prvo se pojavi naslov, pa delić sekunde kasnije i slike
 					ease: 'power4.out',
 					scrollTrigger: {
 						trigger: targetRef.current,
 						start: 'top 80%', // Aktivira se čim vrh sekcije uđe u donji deo ekrana
 						toggleActions: 'play none none none', // Odigra se samo jednom pri ulasku
 					},
+					delay: 0.15, // Mali delay da se prvo vidi naslov pre nego što slike počnu da se pojavljuju
 				},
 			);
 
@@ -86,7 +87,7 @@ export default function ChefGallery() {
 			{/* VRAĆENI STICKY NASLOV - Spušten na bezbednih top-28 i ima automatsko fejdovanje na skrol */}
 			<div
 				ref={titleRef}
-				className='z-20 pointer-events-none transition-opacity duration-300 opacity-100 sticky lg:top-34 w-full flex flex-col justify-center items-center lg:pb-0 pb-10'>
+				className='z-20 pointer-events-none sticky lg:top-34 w-full flex flex-col justify-center items-center lg:pb-0 pb-10'>
 				<span className='text-[10px] font-bold tracking-[0.4em] uppercase text-accent mb-2 block opacity-60'>
 					Visual Identity
 				</span>
