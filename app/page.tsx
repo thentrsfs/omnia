@@ -5,6 +5,7 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 import Hero from '@/components/sections/Hero';
 import Menu from '@/components/sections/Menu';
+import ChefGallery from '@/components/sections/ChefGallery';
 
 // Registrujemo ScrollToPlugin
 gsap.registerPlugin(ScrollToPlugin);
@@ -32,15 +33,8 @@ export default function Home() {
 				/>
 
 				{/* PRIVREMENI PLACEHOLDERI SEKCIJA (Zamenićemo ih pravim komponentama) */}
+				<ChefGallery />
 				<Menu />
-
-				<section
-					id='experience'
-					className='h-screen bg-background border-t border-border flex items-center justify-center'>
-					<h2 className='text-3xl font-serif text-text-secondary'>
-						The Experience Section
-					</h2>
-				</section>
 
 				<section
 					id='reservations'
