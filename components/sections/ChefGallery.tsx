@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -14,6 +14,11 @@ export default function ChefGallery() {
 	const targetRef = useRef<HTMLDivElement>(null);
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 	const titleRef = useRef<HTMLDivElement>(null);
+
+	// State koji prati koje su slike završile učitavanje
+	const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>(
+		{},
+	);
 
 	useGSAP(
 		() => {
@@ -99,6 +104,15 @@ export default function ChefGallery() {
 					<div
 						key={dish.id}
 						className='w-full sm:w-md lg:w-120 h-88 lg:h-125 shrink-0 overflow-hidden relative group'>
+						{/* SVIJETLEĆI KRUŽIĆ (SPINNER) - Vidi se samo dok je !loadedImages[dish.id] */}
+						{!loadedImages[dish.id] && (
+							<div className='absolute z-20 flex flex-col items-center gap-3 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
+								<div className='w-8 h-8 border-2 border-accent/20 border-t-accent rounded-full animate-spin' />
+								<span className='text-[10px] tracking-widest uppercase font-serif text-text-primary/40 animate-pulse'>
+									Loading
+								</span>
+							</div>
+						)}
 						<div className='absolute -inset-px bg-black/35 group-hover:bg-black/12 transition-colors duration-500  z-10' />
 						<div className='absolute -inset-px bg-linear-to-t from-black/80 via-transparent to-transparent z-10' />
 
@@ -107,12 +121,13 @@ export default function ChefGallery() {
 							alt={dish.name}
 							fill
 							sizes='(max-width: 1024px) 100vw, 480px'
-							className='
-    object-cover object-center
-    transform-gpu
-    will-change-transform
-    ease-out
-  '
+							priority={dish.id <= 3}
+							onLoad={() => {
+								setLoadedImages((prev) => ({ ...prev, [dish.id]: true }));
+							}}
+							className={`w-full h-full object-cover object-center transition-opacity duration-700 ${
+								loadedImages[dish.id] ? 'opacity-100' : 'opacity-0'
+							}`}
 						/>
 						<div className='absolute bottom-8 left-8 z-20'>
 							<span className='text-[9px] font-bold tracking-[0.3em] uppercase text-accent mb-2 block'>
