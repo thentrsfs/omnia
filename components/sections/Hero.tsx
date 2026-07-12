@@ -108,7 +108,7 @@ export default function Hero({ onMenuClick, onBookClick }: HeroProps) {
 					Culinary Excellence & Design
 				</span>
 
-				<h1 className='font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-wide text-text-primary leading-[1.15] max-w-4xl'>
+				<h1 className='font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-wide text-text-primary leading-[1.05] max-w-4xl'>
 					<div className='hero-title-line inline-block opacity-0'>
 						Crafting unforgettable
 					</div>{' '}
@@ -118,7 +118,7 @@ export default function Hero({ onMenuClick, onBookClick }: HeroProps) {
 					</div>
 				</h1>
 
-				<p className='hero-desc mt-6 md:mt-8 text-sm md:text-base text-text-secondary font-light max-w-lg leading-relaxed tracking-wide opacity-0'>
+				<p className='hero-desc mt-6 md:mt-8 text-sm md:text-base text-text-secondary font-light max-w-xs md:max-w-lg leading-relaxed tracking-wide opacity-0'>
 					A seamless fusion of modern technology and high-end gastronomy.
 					Explore our curated digital menu or secure your table tonight.
 				</p>
