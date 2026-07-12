@@ -84,23 +84,25 @@ export default function ChefGallery() {
 		<section
 			ref={targetRef}
 			className='relative lg:h-dvh w-full lg:overflow-hidden flex flex-col '>
-			{/* VRAĆENI STICKY NASLOV - Spušten na bezbednih top-28 i ima automatsko fejdovanje na skrol */}
+			<div className='absolute top-0 left-0 w-full h-32 bg-linear-to-b from-background via-background/60 to-transparent pointer-events-none z-30' />
+
 			<div
 				ref={titleRef}
-				className='z-20 pointer-events-none sticky lg:top-34 w-full flex flex-col justify-center items-center lg:pb-0 pb-10'>
-				<span className='text-[10px] font-bold tracking-[0.4em] uppercase text-accent mb-2 block opacity-60'>
+				className='absolute top-34 left-1/2 -translate-x-1/2 text-center'>
+				<span className='text-[9px] font-bold tracking-[0.4em] uppercase text-accent mb-3 block'>
 					Visual Identity
 				</span>
-				<h2 className='font-serif text-3xl lg:text-4xl font-light text-text-primary leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]'>
-					Seasonal <br />
-					<span className='italic text-accent font-normal'>Creations.</span>
+				<h2 className='font-serif text-4xl md:text-5xl font-light tracking-tight text-text-primary'>
+					Seasonal
+					<span className='italic text-accent font-normal'> Creations.</span>
 				</h2>
+				<div className='w-12 h-px bg-accent/40 mx-auto mt-4' />
 			</div>
 
 			{/* HORIZONTALNI KONTEJNER - Visina i pozicija su vraćene na prvu verziju */}
 			<div
 				ref={scrollContainerRef}
-				className='flex flex-col lg:flex-row gap-8 lg:gap-12 px-6 lg:px-48 items-center h-full w-full lg:w-max raw-scroll'>
+				className='flex flex-col lg:flex-row gap-8 lg:gap-12 px-6 lg:px-48 pt-20 items-center h-full w-full lg:w-max raw-scroll'>
 				{SIGNATURE_DISHES.map((dish) => (
 					<div
 						key={dish.id}

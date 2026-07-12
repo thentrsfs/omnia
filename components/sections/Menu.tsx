@@ -157,14 +157,14 @@ export default function Menu() {
 			className='py-32 lg:min-h-dvh w-full relative z-30'>
 			<div className='mx-auto max-w-6xl px-6 lg:px-12'>
 				{/* ZAGLAVLJE MENIJA */}
-				<div className='menu-title-anim text-center mb-20 opacity-0'>
+				<div className='menu-title-anim text-center mb-20'>
 					<span className='text-[10px] font-bold tracking-[0.4em] uppercase text-accent mb-3 block'>
 						A Culinary Journey
 					</span>
-					<h2 className='font-serif text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-text-primary'>
+					<h2 className='font-serif text-4xl md:text-5xl font-light tracking-tight text-text-primary'>
 						The Main <span className='italic text-accent'>Menu.</span>
 					</h2>
-					<div className='w-12 h-px bg-accent/40 mx-auto mt-6' />
+					<div className='w-12 h-px bg-accent/40 mx-auto mt-4' />
 				</div>
 
 				{/* LUKSUZNI FILTERI (KATEGORIJE) */}
