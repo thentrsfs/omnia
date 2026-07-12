@@ -3,13 +3,26 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { X } from 'lucide-react';
-
+import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 
 export default function Navbar() {
+	const pathname = usePathname();
+
 	const [isOpen, setIsOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 	const cartCount = 1;
+
+	const handleLogoClick = (e: React.MouseEvent) => {
+		// Ako smo na home page-u ('/'), spreči podrazumevano osvežavanje i skroluj glatko na vrh
+		if (pathname === '/') {
+			e.preventDefault();
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth', // Glatki prelaz
+			});
+		}
+	};
 
 	// Prati skrol stranice da bi dinamički promenio stil Navbara
 	useEffect(() => {
@@ -35,7 +48,7 @@ export default function Navbar() {
 				scrollTo: { y: `#${id}` },
 				ease: 'power4.inOut',
 			});
-		}, 300); // Čeka da se zatvori mobilni meni, pa onda glatko skroluje
+		}, 200); // Čeka da se zatvori mobilni meni, pa onda glatko skroluje
 	};
 
 	useEffect(() => {
@@ -52,8 +65,8 @@ export default function Navbar() {
 			<nav
 				className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-300 ${
 					isScrolled
-						? 'bg-background/50 backdrop-blur-md border-b border-border/40'
-						: 'bg-transparent border-b border-transparent'
+						? 'bg-linear-to-b from-background via-background/80 to-transparent '
+						: 'bg-transparent'
 				}`}>
 				{/* Top Bar - Smanjujemo mu vidljivost ili ga činimo providnijim na vrhu */}
 				<div
@@ -70,7 +83,7 @@ export default function Navbar() {
 					{/* Smanjili smo h-24 na h-20 da bude elegantniji i manje glomazan */}
 					<div className='flex lg:h-20 h-16 items-center justify-between md:grid md:grid-cols-3'>
 						{/* DESKTOP LINKS */}
-						<div className='hidden md:flex items-center space-x-10 text-[11px] tracking-[0.2em] uppercase text-text-secondary'>
+						<div className='hidden md:flex items-center space-x-10 font-medium text-[11px] tracking-[0.2em] uppercase text-text-secondary'>
 							<button
 								onClick={() => scrollToSection('menu')}
 								className='hover:text-accent transition-colors duration-300 relative py-1 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-accent hover:after:w-full after:transition-all after:duration-300 cursor-pointer'>
@@ -87,15 +100,16 @@ export default function Navbar() {
 						<div className='flex justify-start md:justify-center'>
 							<Link
 								href='/'
+								onClick={handleLogoClick}
 								className='font-serif text-3xl font-light tracking-[0.15em] text-text-primary'>
 								GUSTO<span className='text-accent font-sans font-bold'>.</span>
 							</Link>
 						</div>
 
 						{/* DESKTOP RIGHT */}
-						<div className='hidden md:flex items-center justify-end space-x-8'>
+						<div className='hidden md:flex items-center font-medium justify-end space-x-8'>
 							<button className='group relative p-2 text-text-secondary hover:text-text-primary transition-colors duration-300 cursor-pointer'>
-								<span className='text-[11px] font-medium tracking-[0.2em] uppercase mr-2 group-hover:text-accent transition-colors'>
+								<span className='text-[11px] tracking-[0.2em] uppercase mr-2 group-hover:text-accent transition-colors'>
 									Cart
 								</span>
 								<span className='inline-flex h-5 w-5 items-center justify-center rounded-full bg-surface border border-border text-[10px] font-semibold text-accent group-hover:border-accent/40 transition-colors'>
@@ -106,7 +120,7 @@ export default function Navbar() {
 							{/* Ako je na vrhu, dugme ima transparentniju ivicu da ne vrišti */}
 							<button
 								onClick={() => scrollToSection('reservations')}
-								className={`relative inline-flex items-center justify-center px-6 py-2.5 text-[11px] tracking-[0.2em] uppercase text-text-primary border transition-all duration-500 group overflow-hidden cursor-pointer ${
+								className={`relative inline-flex items-center justify-center px-6 py-2.5 text-[10px] tracking-[0.2em] uppercase text-text-primary border transition-all duration-500 group overflow-hidden cursor-pointer ${
 									isScrolled
 										? 'border-border hover:border-accent'
 										: 'border-text-primary/30 hover:border-accent'
