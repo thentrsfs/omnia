@@ -7,6 +7,7 @@ import Hero from '@/components/sections/Hero';
 import Menu from '@/components/sections/Menu';
 import ChefGallery from '@/components/sections/ChefGallery';
 import Experience from '@/components/sections/Experience';
+import Footer from '@/components/sections/Footer';
 
 // Registrujemo ScrollToPlugin
 gsap.registerPlugin(ScrollToPlugin);
@@ -35,6 +36,7 @@ export default function Home() {
 				<ChefGallery />
 				<Menu />
 				<Experience />
+				<Footer />
 			</main>
 		</>
 	);

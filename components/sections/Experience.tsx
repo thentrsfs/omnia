@@ -53,16 +53,16 @@ export default function Experience() {
 			if (videoRef.current) {
 				gsap.fromTo(
 					videoRef.current,
-					{ scale: 1.15, yPercent: -5 },
+					{ scale: 1.4, yPercent: -15 },
 					{
 						scale: 1.0,
-						yPercent: 5,
+						yPercent: 15,
 						ease: 'none',
 						scrollTrigger: {
 							trigger: videoContainerRef.current,
 							start: 'top bottom', // kreće čim dno ekrana dotakne vrh videa
-							end: 'bottom top', // završava se kad video skroz ode gore
-							scrub: true, // ključno! vezuje brzinu animacije direktno za prst na skrolu
+							end: 'bottom 30%', // završava se kad video skroz ode gore
+							scrub: 1, // ključno! vezuje brzinu animacije direktno za prst na skrolu
 						},
 					},
 				);
@@ -121,15 +121,12 @@ export default function Experience() {
 
 					<video
 						ref={videoRef}
+						src='/video/experience.mp4'
 						autoPlay
 						loop
 						muted
-						className='w-full h-full object-cover'>
-						<source
-							src='/video/experience.mp4'
-							type='video/mp4'
-						/>
-					</video>
+						className='absolute inset-0 w-full h-full object-cover object-center brightness-90 will-change-transform'
+					/>
 
 					{/* TEKST PREKO VIDEA/SLIKE - Pozicioniran u centru ili u ćošku */}
 					<div
