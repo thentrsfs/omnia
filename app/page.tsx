@@ -6,6 +6,7 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import Hero from '@/components/sections/Hero';
 import Menu from '@/components/sections/Menu';
 import ChefGallery from '@/components/sections/ChefGallery';
+import Experience from '@/components/sections/Experience';
 
 // Registrujemo ScrollToPlugin
 gsap.registerPlugin(ScrollToPlugin);
@@ -33,6 +34,7 @@ export default function Home() {
 				/>
 				<ChefGallery />
 				<Menu />
+				<Experience />
 			</main>
 		</>
 	);
